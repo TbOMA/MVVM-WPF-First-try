@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:passBox="clr-namespace:PasswordBoxMVVM.Components;assembly=PasswordBoxMVVM"
+                    >
+    <!--Colors-->
+    <Color x:Key="ColorPrimary1">#FF47B5B0</Color>
+
+    <!--Brushes-->
+    <SolidColorBrush x:Key="BrashPrimary1" Color="{StaticResource ColorPrimary1}"/>
+
+    <Style TargetType="PasswordBox">
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="FontFamily" Value="Bahnschrift SemiBold Condensed"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="BorderBrush" Value="Aqua"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="False">
+                <Setter Property="BorderBrush" Value="Gray"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <!--Text Boxes-->
+    <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="FontFamily" Value="Bahnschrift SemiBold Condensed"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="BorderBrush" Value="Aqua"/>
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <TextBox Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent},
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 x:Name="textSource"
+                                 Background="Transparent"
+                                 Panel.ZIndex="2" />
+                        <TextBox Text="{TemplateBinding Tag}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Foreground" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                            <Setter Property="Foreground" Value="LightGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+
+
+    <!--Buttons-->
+    <Style TargetType="Button">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="FontFamily" Value="Bahnschrift SemiBold Condensed"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Padding" Value="10 5"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ButtonBorder" CornerRadius="5" BorderThickness="4" BorderBrush="Aqua" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" Margin="{TemplateBinding Margin}">
+                        <ContentPresenter/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--TextBlocks-->
+    <Style TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Bahnschrift SemiBold Condensed"/>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="MVVM_FirsTry.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVM_FirsTry.Views"
+             xmlns:controls="clr-namespace:MVVM_FirsTry.Controls" 
+             mc:Ignorable="d" FontSize="24"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ViewType}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Command="{Binding NavigationBetweenControlsCommand}" CommandParameter="AdminLogin" Margin="0 0 150 0" Content="Administrator"/>
+            <Button Grid.Column="1" Command="{Binding NavigationBetweenControlsCommand}" CommandParameter="UserLoginType"  Padding="35 5 35 0" Content="Client"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ViewType}" Value="UserLoginType">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <controls:SelectUserLoginType/>
+        </Grid>
+
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ViewType}" Value="UserRegistration">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <controls:UserSignOut/>
+        </Grid>
+
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ViewType}" Value="UserLogin">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <controls:UserLogin/>
+        </Grid>
+
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ViewType}" Value="AdminLogin">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=" auto"/>
+                <RowDefinition Height=" auto"/>
+                <RowDefinition Height=" auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <TextBlock HorizontalAlignment="Center" Margin="0 100 0 0" Grid.Row="0"  Text="Sign-in"/>
+            </Grid>
+            <Grid Grid.Row="1" Margin=" 0 20 0 0 ">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Style="{StaticResource placeHolder}" Text="{Binding Username}" Tag="Username" Margin="0 40 0 20"  />
+                <TextBlock Grid.Row="1" x:Name="tblPasswordHint" FontSize="20" Width="200" Opacity="0.3"  VerticalAlignment="Center"
+                            Text="Password" Foreground="#000" Margin="75,5"/>
+                <PasswordBox Grid.Row="1" Name="pbPassword" FontSize="18" Width="200" FontFamily="Rubik" 
+                            VerticalAlignment="Center" Foreground="#000" Background="{x:Null}" Margin="75,4" PasswordChanged="pbPassword_PasswordChanged"/>
+                <TextBlock  Grid.Row="2" Margin=" 0 10 0 0" DataContext="{Binding ErrorMessageViewModel}" Visibility="{Binding HasMessage,Converter={StaticResource BooleanToVisibilityConverter}}" Text="{Binding Message}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="DarkRed"/>
+
+            </Grid>
+            <Grid Grid.Row="1" Margin="  0 150  0 0 " HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"  Click="AdminLogin_Click" Content="Login"  Padding="15 0 15 0" Margin=" 0 20 11 0"  Grid.Row="5" IsDefault="True"/>
+                <Button Grid.Column="1"  Command="{Binding NavigationBetweenControlsCommand}" CommandParameter="Cancel" Content="Cancel" Margin="80 20 0 0"  Padding="10 0 10 0" Grid.Row="5"/>
+
+            </Grid>
+            
+        </Grid>
+
+    </Grid>
+</UserControl>
