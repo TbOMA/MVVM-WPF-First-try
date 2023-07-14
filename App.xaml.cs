@@ -41,14 +41,21 @@ namespace MVVM_FirsTry
         {
             IServiceCollection services = new ServiceCollection();
             services.AddSingleton<ApplicationContext>();
-            services.AddSingleton <IDataService<Administrator>,AdminDataService>();
-            services.AddSingleton<IAuthenticationService, AuthenticationService>();
-            services.AddSingleton<IDataService<User>, AccountDataService>();
-            services.AddSingleton<IDataService<Order>, OrderDataService>();
+            //services.AddSingleton <IDataService<Administrator>,AdminDataService>();
+            //services.AddSingleton<IDataService<User>, AccountDataService>();
+            //services.AddSingleton<IDataService<Order>, OrderDataService>();
+            services.AddScoped<IDataService<User>, AccountDataService>();
+            //services.AddScoped<IAccountService>(provider => provider.GetService<AccountDataService>());
             services.AddSingleton<IAccountService, AccountDataService>();
-            services.AddSingleton<IOrderService, OrderDataService>(); 
+            //services.AddSingleton<IAdminService, AdminDataService>();
+            services.AddSingleton<IDataService<Administrator>, AdminDataService>();
+
+
+            services.AddSingleton<IOrderService, OrderDataService>();
+            services.AddSingleton<ICarService,CarDataService>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<CarSelectionViewModel>();
+            services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<INavigator, Navigator>();
             services.AddScoped<IDataOutput<CarSelectionViewModel>, DataOutput<CarSelectionViewModel>>();
             services.AddScoped<IDataOutput<AdminViewModel>, DataOutput<AdminViewModel>>();
@@ -58,7 +65,6 @@ namespace MVVM_FirsTry
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddSingleton<MessageViewModel>();
             services.AddSingleton<AdminViewModel>();
-            services.AddSingleton<ICarService,CarDataService>();
             services.AddSingleton<IOrderingService, OrderingService>();  
             services.AddSingleton<IViewModelFactory,ViewModelFactory>();
             services.AddSingleton<CreateViewModel<LoginViewModel>>(services =>
@@ -72,7 +78,6 @@ namespace MVVM_FirsTry
             {
                 return () => new CarSelectionViewModel(
                     services.GetRequiredService<ICarService>(),
-                    services.GetRequiredService<LoginViewModel>(),
                     services.GetRequiredService<IOrderingService>(),
                     services.GetRequiredService<IAccountService>(),
                     services.GetRequiredService<IAccountStore>(),
@@ -82,7 +87,7 @@ namespace MVVM_FirsTry
             services.AddSingleton<CreateViewModel<AdminViewModel>>(services =>
             {
                 return () => new AdminViewModel(
-                    services.GetRequiredService<IDataService<Order>>(),
+                    services.GetRequiredService<IOrderService>(),
                     services.GetRequiredService<ICarService>()
                     );
             });

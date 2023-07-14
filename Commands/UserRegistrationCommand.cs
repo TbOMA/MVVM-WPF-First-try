@@ -34,8 +34,7 @@ namespace MVVM_FirsTry.Commands
 
         public async void Execute(object? parameter)
         {
-            _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(ViewType.CarSelection);
-            return;
+            
             try
             {
                 RegistrationResult registrationResult = await _authenticator.Register(_loginViewModel.Username, _loginViewModel.PassportNumber,_loginViewModel.DepositAmount);

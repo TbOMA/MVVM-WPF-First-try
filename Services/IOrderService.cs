@@ -10,6 +10,6 @@ namespace MVVM_FirsTry.Services
     public interface IOrderService :IDataService<Order>
     {
         Task<IEnumerable<Order>> GetAllUserOrdersByPassport(string passport);
-
+        
     }
 }

@@ -12,12 +12,12 @@ namespace MVVM_FirsTry.State.Authenticators
     public class Authenticator : IAuthenticator
     {
         private readonly IAuthenticationService _authenticationService;
-        private readonly IAccountStore _accountStore;
+        //private readonly IAccountStore _accountStore;
 
-        public Authenticator(IAuthenticationService authenticationService, IAccountStore accountStore)
+        public Authenticator(IAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
-            _accountStore = accountStore;
+            //_accountStore = accountStore;
         }
 
        

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.Win32;
 using MVVM_FirsTry.Commands;
 using MVVM_FirsTry.Database;
 using MVVM_FirsTry.Database.Services;
@@ -27,6 +28,7 @@ namespace MVVM_FirsTry.ViewModels
 		private readonly IOrderService _orderService;
 		private readonly IDataOutput<CarSelectionViewModel> _carDataOutput;
 		private readonly IAccountStore _accountStore;
+        
         public IEnumerable<Car> Cars { get;  set; }
         public IEnumerable<Order> Orders { get;  set; }
 
@@ -248,7 +250,7 @@ namespace MVVM_FirsTry.ViewModels
         {
             set => ErrorMessageViewModel.Message = value;
         }
-        public CarSelectionViewModel(ICarService carService, LoginViewModel loginViewModel, 
+        public CarSelectionViewModel(ICarService carService, 
 			IOrderingService orderingService, IAccountService accountService,
 			IAccountStore accountStore, IOrderService orderService)
         {
@@ -256,9 +258,10 @@ namespace MVVM_FirsTry.ViewModels
             _accountStore = accountStore;
             _orderService = orderService;
             
+            onStart();
             _carDataOutput = new DataOutput<CarSelectionViewModel>(this);
             ListingNavigationCommand = new ListingNavigationCommand<CarSelectionViewModel>(this, LoadCars(),LoadUserOrders());
-            MakeOrderCommand = new MakeOrderCommand(this, loginViewModel, orderingService, carService, accountService);
+            MakeOrderCommand = new MakeOrderCommand(this,  orderingService, carService, accountService,accountStore);
             ErrorMessageViewModel = new MessageViewModel();
             NavigationBetweenControlsCommand = new NavigationBetweenControlsCommand<CarSelectionViewModel>(this);
             PayForCarCommand = new PayForCarCommand(this,orderingService);
@@ -271,7 +274,29 @@ namespace MVVM_FirsTry.ViewModels
 			return Cars;
 
         }
-		
+		public async void onStart()
+		{
+            await _orderService.Delete(6);
+            
+            /*Car car = await _carService.Get(2);
+            User user = _accountStore.CurrentAccount;
+            Order order = new Order()
+            {
+                Car = car,
+                User = user,
+                CarID = car.Id,
+                UserId = user.Id,
+                IsPaid = false,
+                OrderStatus = OrderStatus.IsProcessed,
+                StartTime = DateTime.Now,
+                EndTime = DateTime.Today.AddDays(1),
+                TotalAmount = 5000,
+                RejectionReason = ""
+            };
+
+
+            await _orderService.Create(order);*/
+        }
         public void CarListingNavigation(int carsCounter)
         {
             _carDataOutput.CarsDataOutput(carsCounter);
@@ -282,7 +307,7 @@ namespace MVVM_FirsTry.ViewModels
         }
         public async Task<IEnumerable<Order>> LoadUserOrders()
         {
-            Orders = await _orderService.GetAllUserOrdersByPassport("1");
+            Orders = await _orderService.GetAllUserOrdersByPassport(_accountStore.CurrentAccount.PassportNumber);
             OrderListingNavigation(0);
             return Orders;
         }

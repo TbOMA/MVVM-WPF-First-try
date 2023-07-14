@@ -1,10 +1,12 @@
 ﻿using Azure.Core.Pipeline;
+using Microsoft.Win32;
 using MVVM_FirsTry.Commands;
 using MVVM_FirsTry.Models;
 using MVVM_FirsTry.Services;
 using MVVM_FirsTry.State.DataOutput;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace MVVM_FirsTry.ViewModels
 {
     public class AdminViewModel:ViewModelBase
     {
-		private readonly IDataService<Order> _orderService;
+		private readonly IOrderService _orderService;
 		private readonly ICarService _carService;
 		private readonly IDataOutput<AdminViewModel> _orderDataOutput;
         public IEnumerable<Order> Orders { get; private set; }
@@ -277,12 +279,12 @@ namespace MVVM_FirsTry.ViewModels
         public ICommand LoadImageCommand { get; }
         public ICommand AddCarCommand { get; }
 
-        public AdminViewModel(IDataService<Order> ordersService, ICarService carService)
+        public AdminViewModel(IOrderService ordersService, ICarService carService)
         {
             _orderService = ordersService;
             _carService = carService;
             NavigationBetweenControlsCommand = new NavigationBetweenControlsCommand<AdminViewModel>(this);
-			
+            //onStart();
             _orderDataOutput = new DataOutput<AdminViewModel>(this);
             OrderManagingCommand = new OrderManagingCommand(this, ordersService);
             ErrorMessageViewModel = new MessageViewModel();
@@ -297,6 +299,26 @@ namespace MVVM_FirsTry.ViewModels
             OrderListingNavigation(0);
             return Orders;
 
+        }
+        public async void onStart()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                byte[] imageData = File.ReadAllBytes(openFileDialog.FileName);
+                ImageData = imageData;
+            }
+            Car car = new Car()
+            {
+                IsAvailable = true,
+                RentPrice = 1200,
+                IsDamaged = false,
+                DamageDescription = "",
+                CarName = "BMW",
+                Description = "Drift car",
+                ImageData = ImageData
+            };
+            await _carService.Create(car);
         }
         public void OrderListingNavigation(int ordersCounter)
         {

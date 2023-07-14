@@ -39,7 +39,6 @@ namespace MVVM_FirsTry.Services.OrderingService
             }
             if (result == OrderingResult.Success)
             {
-                car.IsAvailable = false;
                 Order order = new Order()
                 {
                     Car = car,
@@ -53,11 +52,16 @@ namespace MVVM_FirsTry.Services.OrderingService
                     TotalAmount = totalAmount,
                     RejectionReason = ""
                 };
-               user.ClientOrders.Add(order);
+
+
+                //user.ClientOrders.Clear();
                 await _orderingService.Create(order);
+                user.ClientOrders.Add(order);
+                car.IsAvailable = false;
                 await _carService.Update(car.Id, car);
             }
-            
+
+
             return result;
         }
         public async Task<PaymentResult> PayForOrder(Order order)

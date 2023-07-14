@@ -16,8 +16,8 @@ namespace MVVM_FirsTry.Commands
         public event EventHandler? CanExecuteChanged;
         private readonly AdminViewModel _adminViewModel;
        
-        private readonly ICarService _carService;
-        public EditCarCommand(AdminViewModel adminViewModel,  ICarService carService)
+        private readonly IDataService<Car> _carService;
+        public EditCarCommand(AdminViewModel adminViewModel,  IDataService<Car> carService)
         {
             _adminViewModel = adminViewModel;
             _carService = carService;

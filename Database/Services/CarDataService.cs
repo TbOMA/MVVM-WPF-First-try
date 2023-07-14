@@ -11,6 +11,7 @@ namespace MVVM_FirsTry.Database.Services
 {
     public class CarDataService : ICarService
     {
+
         private readonly ApplicationContext _applicationContext;
 
         public CarDataService(ApplicationContext applicationContext)
@@ -41,7 +42,7 @@ namespace MVVM_FirsTry.Database.Services
 
         public async Task<IEnumerable<Car>> GetAll()
         {
-            IEnumerable<Car> dbrecord = await  _applicationContext.Cars.Include(a => a.Order).ToListAsync();
+            IEnumerable<Car> dbrecord = await _applicationContext.Cars.Include(a => a.Order).ToListAsync();
             if (dbrecord == null)
             {
                 return null;
@@ -66,7 +67,7 @@ namespace MVVM_FirsTry.Database.Services
                 dbrecord.IsDamaged = entity.IsDamaged;
                 dbrecord.DamageDescription = entity.DamageDescription;
                 dbrecord.Order = entity.Order;
-                dbrecord.OrderId = entity.OrderId;    
+                dbrecord.OrderId = entity.OrderId;
                 _applicationContext.SaveChanges();
                 return dbrecord;
             }

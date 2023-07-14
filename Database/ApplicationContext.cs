@@ -23,19 +23,17 @@ namespace MVVM_FirsTry.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()
-                .HasOne(a => a.User)
-                .WithMany(c => c.ClientOrders)
-                .HasForeignKey(c => c.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+               .HasOne(a => a.User)
+               .WithMany(c => c.ClientOrders)
+               .HasForeignKey(c => c.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<Order>()
                 .HasOne(a => a.Car)
                 .WithOne(c => c.Order)
                 .HasForeignKey<Car>(c => c.OrderId)
-                .OnDelete(DeleteBehavior.Cascade);
-            
-
+                .OnDelete(DeleteBehavior.Restrict);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

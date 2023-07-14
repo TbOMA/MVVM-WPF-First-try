@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Internal;
 using MVVM_FirsTry.Models;
 using MVVM_FirsTry.Services;
 using System;
@@ -15,7 +16,7 @@ namespace MVVM_FirsTry.Database.Services
     {
         private readonly ApplicationContext _applicationContext;
 
-        public AccountDataService( ApplicationContext applicationContext)
+        public AccountDataService(ApplicationContext applicationContext)
         {
             _applicationContext = applicationContext;
         }
@@ -24,7 +25,7 @@ namespace MVVM_FirsTry.Database.Services
         {
             _applicationContext.Users.Add(entity);
             await _applicationContext.SaveChangesAsync();
-            
+
         }
 
         public Task<bool> Delete(int id)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using MVVM_FirsTry.Models;
 using MVVM_FirsTry.Services;
 using System;

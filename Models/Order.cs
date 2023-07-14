@@ -1,6 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace MVVM_FirsTry.Models
     public class Order
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; } 
         public int CarID { get; set; }
         public Car? Car { get; set; }
         public int UserId { get; set; }

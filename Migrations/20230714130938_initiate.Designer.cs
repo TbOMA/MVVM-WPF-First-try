@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVVM_FirsTry.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230705102435_initiate")]
+    [Migration("20230714130938_initiate")]
     partial class initiate
     {
         /// <inheritdoc />
@@ -52,9 +52,6 @@ namespace MVVM_FirsTry.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CarImagePath")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CarName")
                         .HasColumnType("nvarchar(max)");
 
@@ -63,6 +60,10 @@ namespace MVVM_FirsTry.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
@@ -99,10 +100,10 @@ namespace MVVM_FirsTry.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsPaid")
+                    b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("OrderStatus")
+                    b.Property<int>("OrderStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("RejectionReason")
@@ -111,7 +112,7 @@ namespace MVVM_FirsTry.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal?>("TotalAmount")
+                    b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UserId")

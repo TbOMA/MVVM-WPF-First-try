@@ -101,7 +101,7 @@ namespace MVVM_FirsTry.Services.AuthenticationServices
                 };
                 CurrentAccount = user;
 
-               // await _accountService.Create(user);
+                await _accountService.Create(user);
             }
 
             return result;

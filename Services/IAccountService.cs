@@ -10,7 +10,6 @@ namespace MVVM_FirsTry.Services
     public interface IAccountService : IDataService<User>
     {
         Task<User> GetByPassportNumber(string passportNumber);
-        Task<User> GetByEmail(string email);
         Task<User> GetByUsername(string username);
 
     }
