@@ -35,6 +35,7 @@ namespace MVVM_FirsTry.Database
                 .HasForeignKey<Car>(c => c.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
             
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

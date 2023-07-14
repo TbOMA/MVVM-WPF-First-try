@@ -1,4 +1,5 @@
-﻿using MVVM_FirsTry.Commands;
+﻿using Microsoft.Win32;
+using MVVM_FirsTry.Commands;
 using MVVM_FirsTry.Database;
 using MVVM_FirsTry.Database.Services;
 using MVVM_FirsTry.Models;
@@ -10,10 +11,13 @@ using SimpleTrader.WPF.State.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace MVVM_FirsTry.ViewModels
 {
@@ -78,8 +82,8 @@ namespace MVVM_FirsTry.ViewModels
 				OnPropertyChanged(nameof(IsAvailable));
 			}
 		}
-		private string _carImagePath;
-		public string CarImagePath
+		private BitmapImage _carImagePath;
+		public BitmapImage CarImagePath
         {
 			get
 			{
@@ -251,8 +255,7 @@ namespace MVVM_FirsTry.ViewModels
             _carService = carService;
             _accountStore = accountStore;
             _orderService = orderService;
-
-
+            
             _carDataOutput = new DataOutput<CarSelectionViewModel>(this);
             ListingNavigationCommand = new ListingNavigationCommand<CarSelectionViewModel>(this, LoadCars(),LoadUserOrders());
             MakeOrderCommand = new MakeOrderCommand(this, loginViewModel, orderingService, carService, accountService);
@@ -283,37 +286,30 @@ namespace MVVM_FirsTry.ViewModels
             OrderListingNavigation(0);
             return Orders;
         }
+        
 
         public void CheckPossibilityOfPayment()
         {
-            if (CurrentIndex < Orders.Count())
-            {
-                var currentOrder = Orders.ElementAt(CurrentIndex);
-                if (!currentOrder.IsPaid && currentOrder.OrderStatus != OrderStatus.Reject &&
-                    currentOrder.OrderStatus != OrderStatus.IsProcessed)
+			
+                if (CurrentIndex < Orders.Count())
                 {
-                    IsPayEnable = true;
+                    var currentOrder = Orders.ElementAt(CurrentIndex);
+                    if (!currentOrder.IsPaid && currentOrder.OrderStatus != OrderStatus.Reject &&
+                        currentOrder.OrderStatus != OrderStatus.IsProcessed)
+                    {
+                        IsPayEnable = true;
+                    }
+                    else
+                    {
+                        IsPayEnable = false;
+                    }
                 }
                 else
                 {
                     IsPayEnable = false;
                 }
-            }
-            else
-            {
-                IsPayEnable = false;
-            }
+                
+            
         }
     }
 }
-/*Car car = new Car()
-			{
-				IsAvailable = true,
-				RentPrice = 4000,
-				IsDamaged = false,
-				DamageDescription = "",
-				CarName = "Maybach",
-				Description = "Laxury car",
-				CarImagePath = "/Resources/maybach.jpg"
-			};
-			await _carService.Create(car);*/

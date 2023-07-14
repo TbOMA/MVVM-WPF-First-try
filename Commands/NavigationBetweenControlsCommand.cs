@@ -60,6 +60,10 @@ namespace MVVM_FirsTry.Commands
                     break;
                 case "CarAddingView":
                     viewModel.ViewType = "CarAddingView";
+                    viewModel.CarName = string.Empty;
+                    viewModel.RentPrice = 0;
+                    viewModel.CarDescription = string.Empty;
+                    viewModel.IsAvailable = true;
                     break;
                 case "SelectedCar":
                     if (viewModel.Cars[viewModel.CurrentIndex].IsAvailable)

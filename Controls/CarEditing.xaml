@@ -15,7 +15,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Gray" BorderThickness="2" Background="White" Width="700" Height="350" CornerRadius="5" Margin="30 30 30 0" >
+            <Border Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="Gray" BorderThickness="2" Background="White" Width="700" Height="350" CornerRadius="5" Margin="50 30 30 0" >
                 <Grid HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -48,9 +48,9 @@
 
                     </Grid>
                     <Grid VerticalAlignment="Top" Grid.Row="0" Grid.Column="1">
-                        <Image x:Name="CarImage" Margin="10 10 10 0"   Height="250" Width="500" Source="{Binding CarImagePath}" />
+                        <Image x:Name="CarImage" Margin="30 10 10 0"  Height="250" Width="400" Source="{Binding CarImagePath}" Stretch="Uniform" />
                     </Grid>
-                    <TextBlock  Grid.Column="1" Margin=" 0 265 0 0" DataContext="{Binding ErrorMessageViewModel}" Visibility="{Binding HasMessage,Converter={StaticResource BooleanToVisibilityConverter}}" Text="{Binding Message}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="DarkRed"/>
+                    <TextBlock Text="{Binding Message}" Grid.Column="1" Margin=" 0 265 0 0" DataContext="{Binding ErrorMessageViewModel}" Visibility="{Binding HasMessage,Converter={StaticResource BooleanToVisibilityConverter}}"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="DarkRed"/>
                     <Grid Grid.Row="1" Grid.Column="1" Margin="-270 5 0 0 "  >
                         <Button Command="{Binding EditCarCommand}"  Content="Edit car" Width="400" Padding="170 10 0 8"/>
                     </Grid>

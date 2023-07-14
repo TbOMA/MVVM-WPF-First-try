@@ -50,7 +50,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Image x:Name="CarImage" Margin="-40 10 10 0" Height="250" Width="500" Source="{Binding CarImagePath}" />
+                        <Image x:Name="CarImage" Margin="10 10 10 0" Height="250" Width="360" Source="{Binding CarImagePath}" Stretch="Uniform" />
                         <TextBlock Grid.Row="4" Margin=" 0 0 0 10" DataContext="{Binding ErrorMessageViewModel}" Visibility="{Binding HasMessage,Converter={StaticResource BooleanToVisibilityConverter}}" Text="{Binding Message}" HorizontalAlignment="Center" FontSize="14" Foreground="DarkRed"/>
                         <Button Grid.Row="1"  Margin="-200 10 0 10" Command="{Binding MakeOrderCommand}" CommandParameter="SelectCarCommand" Content="Make order" Width="200" Padding="175 10 0 8"/>
                     </Grid>

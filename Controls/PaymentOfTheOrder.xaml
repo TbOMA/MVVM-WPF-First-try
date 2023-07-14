@@ -48,10 +48,10 @@
                     <TextBlock Grid.Row="8" Grid.Column="0" Margin="80 20 0 0" Text="{Binding PriceToPay, StringFormat='{}{0:c} in total', FallbackValue='$0.00 per day'}" />
                 </Grid>
                 <Grid VerticalAlignment="Top" Grid.Row="0" Grid.Column="1">
-                    <Image x:Name="CarImage" Margin="10 10 10 0"   Height="250" Width="500" Source="{Binding CarImagePath}" />
+                    <Image x:Name="CarImage" Margin="30 10 10 0"   Height="250" Width="400" Source="{Binding CarImagePath}" Stretch="Uniform" />
                 </Grid>
                 <TextBlock  Grid.Column="1" Margin=" 0 265 0 0" DataContext="{Binding ErrorMessageViewModel}" Visibility="{Binding HasMessage,Converter={StaticResource BooleanToVisibilityConverter}}" Text="{Binding Message}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="DarkRed"/>
-                <Grid Grid.Row="1" Grid.Column="1" Margin="-280 5 0 0 "  >
+                <Grid Grid.Row="1" Grid.Column="1"  Margin="-200 5 0 0 "  >
                     <Button Command="{Binding PayForCarCommand}" IsEnabled="{Binding IsPayEnable}" Content="Pay" Width="200"  Padding="85 10 0 8"/>
                     <Grid>
                         <Grid.Style>

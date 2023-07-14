@@ -30,12 +30,20 @@ namespace MVVM_FirsTry.Commands
 
         public async void Execute(object? parameter)
         {
-            Car car = await _carService.Get(_adminViewModel.Cars.ElementAt(_adminViewModel.CurrentIndex).Id);
-            car.RentPrice = _adminViewModel.RentPrice;
-            car.CarName = _adminViewModel.CarName;
-            car.Description = _adminViewModel.CarDescription;
-            car.IsAvailable = _adminViewModel.IsAvailable;
-            await _carService.Update(_adminViewModel.Cars.ElementAt(_adminViewModel.CurrentIndex).Id, car);   
+            try
+            {
+                Car car = await _carService.Get(_adminViewModel.Cars.ElementAt(_adminViewModel.CurrentIndex).Id);
+                car.RentPrice = _adminViewModel.RentPrice;
+                car.CarName = _adminViewModel.CarName;
+                car.Description = _adminViewModel.CarDescription;
+                car.IsAvailable = _adminViewModel.IsAvailable;
+                await _carService.Update(_adminViewModel.Cars.ElementAt(_adminViewModel.CurrentIndex).Id, car);
+                _adminViewModel.ErrorMessage = "Car was successfully changed";
+            }
+            catch (Exception)
+            {
+                _adminViewModel.ErrorMessage = "Car was not changed!";
+            }
         }
     }
 }

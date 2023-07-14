@@ -58,8 +58,10 @@ namespace MVVM_FirsTry.Commands
                     viewModel.ErrorMessage = string.Empty;
                 }
                 else if (_currentObject.GetType() == typeof(Order))
+                {
                     viewModel.OrderListingNavigation(_counter);
-
+                    viewModel.ErrorMessage = string.Empty;
+                }
             }
             else if (parameter.ToString() == "Prev")
             {

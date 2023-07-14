@@ -62,7 +62,7 @@ namespace MVVM_FirsTry.Database.Services
                 dbrecord.RentPrice = entity.RentPrice;
                 dbrecord.IsAvailable = entity.IsAvailable;
                 dbrecord.Description = entity.Description;
-                dbrecord.CarImagePath = entity.CarImagePath;
+                dbrecord.ImageData = entity.ImageData;
                 dbrecord.IsDamaged = entity.IsDamaged;
                 dbrecord.DamageDescription = entity.DamageDescription;
                 dbrecord.Order = entity.Order;

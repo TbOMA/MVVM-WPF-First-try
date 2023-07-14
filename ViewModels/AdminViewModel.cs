@@ -1,4 +1,5 @@
-﻿using MVVM_FirsTry.Commands;
+﻿using Azure.Core.Pipeline;
+using MVVM_FirsTry.Commands;
 using MVVM_FirsTry.Models;
 using MVVM_FirsTry.Services;
 using MVVM_FirsTry.State.DataOutput;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace MVVM_FirsTry.ViewModels
 {
@@ -204,8 +206,8 @@ namespace MVVM_FirsTry.ViewModels
 			}
 		}
 		
-		private string _carImagePath;
-		public string CarImagePath
+		private BitmapImage _carImagePath;
+		public BitmapImage CarImagePath
         {
 			get
 			{
@@ -217,6 +219,19 @@ namespace MVVM_FirsTry.ViewModels
 				OnPropertyChanged(nameof(CarImagePath));
 			}
 		}
+        private byte[] _imageData;
+        public byte[] ImageData
+        {
+            get
+            {
+                return _imageData;
+            }
+            set
+            {
+                _imageData = value;
+                OnPropertyChanged(nameof(ImageData));
+            }
+        }
         private bool _isPrevEnable;
         public bool IsPrevEnable
         {
@@ -259,8 +274,8 @@ namespace MVVM_FirsTry.ViewModels
 		public ICommand ListingNavigationCommand { get; }
 		public ICommand OrderManagingCommand { get; }
         public ICommand EditCarCommand { get; }
-
-
+        public ICommand LoadImageCommand { get; }
+        public ICommand AddCarCommand { get; }
 
         public AdminViewModel(IDataService<Order> ordersService, ICarService carService)
         {
@@ -273,7 +288,8 @@ namespace MVVM_FirsTry.ViewModels
             ErrorMessageViewModel = new MessageViewModel();
             ListingNavigationCommand = new ListingNavigationCommand<AdminViewModel>(this,LoadCars(),LoadOrders());
             EditCarCommand = new EditCarCommand(this, _carService);
-
+            AddCarCommand = new AddCarCommand(this, _carService);
+            LoadImageCommand = new LoadImageCommand(this);
         }
         public async Task<IEnumerable<Order>> LoadOrders()
         {

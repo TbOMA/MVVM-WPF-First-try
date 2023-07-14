@@ -61,8 +61,8 @@
 
                         <TextBlock Grid.Row="8" Grid.Column="0" Margin="80 20 0 0" Text="{Binding RentPrice, StringFormat='{}{0:c} per day', FallbackValue='$0.00 per day'}" />
                     </Grid>
-                    <Grid VerticalAlignment="Top" Grid.Row="0" Grid.Column="1">
-                        <Image x:Name="CarImage" Margin="10 10 10 0"   Height="250" Width="500" Source="{Binding CarImagePath}" />
+                    <Grid VerticalAlignment="Top" Margin="60 10 10 0" Grid.Row="0" Grid.Column="1">
+                        <Image x:Name="CarImage"    Height="250" Width="360" Source="{Binding CarImagePath}" Stretch="Uniform" />
                     </Grid>
                     <TextBlock  Grid.Column="1" Margin=" 0 265 0 0" DataContext="{Binding ErrorMessageViewModel}" Visibility="{Binding HasMessage,Converter={StaticResource BooleanToVisibilityConverter}}" Text="{Binding Message}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="DarkRed"/>
                     <Grid Grid.Row="1" Grid.Column="1" Margin="-250 5 0 0 "  >

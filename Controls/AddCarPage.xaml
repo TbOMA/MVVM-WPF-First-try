@@ -36,6 +36,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" FontSize="16"  Margin="20 20 0 0 " Text="Rental price:"/>
                         <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource placeHolder}" Text="{Binding RentPrice}" Width="300"  Tag="Rental price" Margin=" 20 0 0 0"  />
@@ -45,15 +46,15 @@
                         <TextBox Grid.Row="5" Grid.Column="0" Style="{StaticResource placeHolder}" Text="{Binding CarDescription}" Width="300" Tag="Car description" Margin="20 0 0 0" />
                         <TextBlock Grid.Row="6" FontSize="16"  Margin="20 10 0 0 " Text="Is available now:"/>
                         <TextBox Grid.Row="7" Grid.Column="0"  Style="{StaticResource placeHolder}" Text="{Binding IsAvailable}" Width="300" Tag="Is avaliable now" Margin="20 0 0 0" />
-                        <TextBlock Grid.Row="8" FontSize="16" Margin="20 10 0 0 " Text="Image path:"/>
-                        <TextBox Grid.Row="9" Grid.Column="0" Style="{StaticResource placeHolder}" Text="{Binding ImagePath}" Width="300"  Tag="Image Path" Margin=" 20 0 0 0"  />
+
+                        <Button Grid.Row="9" HorizontalAlignment="Right" Command="{Binding LoadImageCommand}" Margin="0 10 0 0"  Content="Load car Image" Width="130" />
 
 
+                        <TextBlock Text="{Binding Message}" Grid.Row="10" Margin=" 0 10 0 0" DataContext="{Binding ErrorMessageViewModel}" Visibility="{Binding HasMessage,Converter={StaticResource BooleanToVisibilityConverter}}"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="DarkRed"/>
                     </Grid>
-                   
-                    <TextBlock   Margin=" 0 265 0 0" DataContext="{Binding ErrorMessageViewModel}" Visibility="{Binding HasMessage,Converter={StaticResource BooleanToVisibilityConverter}}" Text="{Binding Message}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="DarkRed"/>
+
                     <Grid Grid.Row="1"  HorizontalAlignment="Center" Margin="0 20 0 0 " >
-                        <Button Command="{Binding EditCarCommand}"  Content="Add car" Width="250" Padding="95 10 0 8"/>
+                        <Button Command="{Binding AddCarCommand}"  Content="Add car" Width="250" Padding="95 10 0 8"/>
                     </Grid>
                 </Grid>
             </Border>
