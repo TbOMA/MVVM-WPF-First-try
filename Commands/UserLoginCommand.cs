@@ -3,12 +3,7 @@ using MVVM_FirsTry.State.Navigation;
 using MVVM_FirsTry.ViewModels.Factory;
 using MVVM_FirsTry.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using MVVM_FirsTry.Services.AuthenticationServices;
 using SimpleTrader.Domain.Exeptions;
 using MVVM_FirsTry.Exeptions;
 
@@ -37,7 +32,6 @@ namespace MVVM_FirsTry.Commands
 
         public async void Execute(object? parameter)
         {
-
             try
             {
                 await _authenticator.Login(_loginViewModel.PassportNumber);

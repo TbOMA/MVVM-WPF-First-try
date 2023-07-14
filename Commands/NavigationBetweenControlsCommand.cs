@@ -1,10 +1,6 @@
 ﻿using MVVM_FirsTry.Models;
-using MVVM_FirsTry.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MVVM_FirsTry.Commands
@@ -72,13 +68,18 @@ namespace MVVM_FirsTry.Commands
                         viewModel.ErrorMessage = "Unfortunately, this car is currently unavailable";
                     break;
                 case "ShowUserOrders":
-                    viewModel.ViewType = "ShowUserOrders";
-                    viewModel.CurrentObject = new Order();
-                    if(viewModel.CurrentIndex == viewModel.Cars.Count-1)  
-                        viewModel.IsNextEnable = true; 
-                    viewModel.IsPrevEnable = false;
-                    viewModel.CurrentIndex = 0;
-                    await viewModel.LoadUserOrders();
+                    if (viewModel.Orders.Count==0)
+                        MessageBox.Show("you have not placed any order yet");
+                    else
+                    {
+                        viewModel.ViewType = "ShowUserOrders";
+                        viewModel.CurrentObject = new Order();
+                        if (viewModel.CurrentIndex == viewModel.Cars.Count - 1)
+                            viewModel.IsNextEnable = true;
+                        viewModel.IsPrevEnable = false;
+                        viewModel.CurrentIndex = 0;
+                        await viewModel.LoadUserOrders();
+                    }
                     break;
                 case "BackToSelectionCar":
                     viewModel.ViewType = string.Empty;

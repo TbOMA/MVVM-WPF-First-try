@@ -1,8 +1,4 @@
 ﻿using MVVM_FirsTry.Models;
-using MVVM_FirsTry.State.DataOutput;
-using MVVM_FirsTry.State.Navigation;
-using MVVM_FirsTry.ViewModels;
-using MVVM_FirsTry.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;

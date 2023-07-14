@@ -1,11 +1,7 @@
-﻿using MVVM_FirsTry.Models;
-using MVVM_FirsTry.Services.OrderingService;
+﻿using MVVM_FirsTry.Services.OrderingService;
 using MVVM_FirsTry.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -31,7 +27,6 @@ namespace MVVM_FirsTry.Commands
 
         public async void Execute(object? parameter)
         {
-
             try
             {
                 PaymentResult paymentResult = await _orderingService.PayForOrder(_carSelectionViewModel.Orders.ElementAt(_carSelectionViewModel.CurrentIndex));

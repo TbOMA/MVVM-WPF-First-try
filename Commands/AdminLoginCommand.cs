@@ -4,10 +4,6 @@ using MVVM_FirsTry.ViewModels;
 using MVVM_FirsTry.ViewModels.Factory;
 using SimpleTrader.Domain.Exeptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MVVM_FirsTry.Commands
@@ -35,8 +31,9 @@ namespace MVVM_FirsTry.Commands
 
         public async void Execute(object? parameter)
         {
-            _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(ViewType.AdminForm);
-            return;
+            
+
+            
             try
             {
                 await _authenticator.Login(_loginViewModel.Username, parameter.ToString());

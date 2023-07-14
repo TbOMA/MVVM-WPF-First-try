@@ -257,8 +257,6 @@ namespace MVVM_FirsTry.ViewModels
             _carService = carService;
             _accountStore = accountStore;
             _orderService = orderService;
-            
-            onStart();
             _carDataOutput = new DataOutput<CarSelectionViewModel>(this);
             ListingNavigationCommand = new ListingNavigationCommand<CarSelectionViewModel>(this, LoadCars(),LoadUserOrders());
             MakeOrderCommand = new MakeOrderCommand(this,  orderingService, carService, accountService,accountStore);
@@ -274,29 +272,7 @@ namespace MVVM_FirsTry.ViewModels
 			return Cars;
 
         }
-		public async void onStart()
-		{
-            await _orderService.Delete(6);
-            
-            /*Car car = await _carService.Get(2);
-            User user = _accountStore.CurrentAccount;
-            Order order = new Order()
-            {
-                Car = car,
-                User = user,
-                CarID = car.Id,
-                UserId = user.Id,
-                IsPaid = false,
-                OrderStatus = OrderStatus.IsProcessed,
-                StartTime = DateTime.Now,
-                EndTime = DateTime.Today.AddDays(1),
-                TotalAmount = 5000,
-                RejectionReason = ""
-            };
-
-
-            await _orderService.Create(order);*/
-        }
+		
         public void CarListingNavigation(int carsCounter)
         {
             _carDataOutput.CarsDataOutput(carsCounter);

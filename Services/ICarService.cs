@@ -9,7 +9,7 @@ namespace MVVM_FirsTry.Services
 {
     public interface ICarService: IDataService<Car>
     {
-        Task<IEnumerable<Car>> GetAll();
+        
         
     }
 }

@@ -1,17 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MVVM_FirsTry.Models;
+﻿using MVVM_FirsTry.Models;
 using MVVM_FirsTry.Services;
-using MVVM_FirsTry.Services.AuthenticationServices;
 using MVVM_FirsTry.Services.OrderingService;
 using MVVM_FirsTry.ViewModels;
 using SimpleTrader.WPF.State.Accounts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MVVM_FirsTry.Commands
@@ -19,7 +12,6 @@ namespace MVVM_FirsTry.Commands
     public class MakeOrderCommand : ICommand
     {
         private readonly CarSelectionViewModel _carSelectionViewModel;
-        //private readonly LoginViewModel _loginViewModel;
         private readonly IOrderingService _orderingService;
         private readonly IDataService<Car> _carService;
         private readonly IAccountService _accountService;

@@ -1,15 +1,7 @@
 ﻿using MVVM_FirsTry.Commands;
-using MVVM_FirsTry.Models;
-using MVVM_FirsTry.Services;
 using MVVM_FirsTry.State.Authenticators;
-using MVVM_FirsTry.State.DataOutput;
 using MVVM_FirsTry.State.Navigation;
 using MVVM_FirsTry.ViewModels.Factory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MVVM_FirsTry.ViewModels
@@ -80,18 +72,11 @@ namespace MVVM_FirsTry.ViewModels
         }
         public LoginViewModel(INavigator navigator, IAuthenticator authenticator, IViewModelFactory viewModelFactory)
         {
-
-
             UserRegistrationCommand = new UserRegistrationCommand(navigator, this, authenticator, viewModelFactory);
             ErrorMessageViewModel = new MessageViewModel();
             NavigationBetweenControlsCommand = new NavigationBetweenControlsCommand<LoginViewModel>(this);
             AdminLoginCommand = new AdminLoginCommand(this, authenticator, navigator, viewModelFactory);
             UserLoginCommand = new UserLoginCommand(this, authenticator, navigator, viewModelFactory);
         }
-        /*public async Task<IEnumerable<Order>> LoadUserOrders()
-        {
-            var userOrders = await _orderService.GetAllUserOrdersByPassport(PassportNumber);
-            return userOrders;
-        }*/
     }
 }

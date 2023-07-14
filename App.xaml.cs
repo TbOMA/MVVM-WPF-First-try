@@ -11,14 +11,7 @@ using MVVM_FirsTry.ViewModels;
 using MVVM_FirsTry.ViewModels.Factory;
 using SimpleTrader.WPF.State.Accounts;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using MVVM_FirsTry.State.DataOutput;
 using MVVM_FirsTry.Services.OrderingService;
 
@@ -32,7 +25,6 @@ namespace MVVM_FirsTry
         protected override void OnStartup(StartupEventArgs e)
         {
             IServiceProvider serviceProvider = CreateServiceProvider();
-
             Window window = serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
             base.OnStartup(e);
@@ -41,13 +33,9 @@ namespace MVVM_FirsTry
         {
             IServiceCollection services = new ServiceCollection();
             services.AddSingleton<ApplicationContext>();
-            //services.AddSingleton <IDataService<Administrator>,AdminDataService>();
-            //services.AddSingleton<IDataService<User>, AccountDataService>();
-            //services.AddSingleton<IDataService<Order>, OrderDataService>();
+            
             services.AddScoped<IDataService<User>, AccountDataService>();
-            //services.AddScoped<IAccountService>(provider => provider.GetService<AccountDataService>());
             services.AddSingleton<IAccountService, AccountDataService>();
-            //services.AddSingleton<IAdminService, AdminDataService>();
             services.AddSingleton<IDataService<Administrator>, AdminDataService>();
 
 

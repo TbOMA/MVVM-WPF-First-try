@@ -1,12 +1,7 @@
 ﻿using Microsoft.Win32;
-using MVVM_FirsTry.Models;
 using MVVM_FirsTry.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MVVM_FirsTry.Commands

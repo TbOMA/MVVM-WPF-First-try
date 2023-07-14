@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MVVM_FirsTry.ViewModels
+﻿namespace MVVM_FirsTry.ViewModels
 {
     public class MessageViewModel : ViewModelBase
     {
